@@ -1,10 +1,7 @@
 package spittr.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import spittr.service.SpitterAuthorityService;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,7 +9,6 @@ import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by 273cn on 16/12/15.

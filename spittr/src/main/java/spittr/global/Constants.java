@@ -1,7 +1,6 @@
 package spittr.global;
 
 import spittr.domain.OAuth2Client;
-import spittr.domain.Role;
 
 /**
  * Created by 273cn on 16/12/24.

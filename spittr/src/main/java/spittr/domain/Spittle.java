@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.*;
-import java.util.Date;
 
 /**
  * Created by 273cn on 16/12/14.

@@ -13,7 +13,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import spittr.domain.OAuth2Client;
-import spittr.domain.Role;
 import spittr.global.Constants;
 
 /**

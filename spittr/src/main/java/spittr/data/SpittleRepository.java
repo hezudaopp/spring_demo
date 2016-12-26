@@ -6,9 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import spittr.domain.Spittle;
 
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * Created by 273cn on 16/12/14.
  */
