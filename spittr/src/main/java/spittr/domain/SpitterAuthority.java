@@ -2,15 +2,14 @@ package spittr.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by 273cn on 16/12/21.
  */
 @Entity
+@Table(indexes = { @Index(name = "idx_username", columnList = "username"),
+    @Index(name = "idx_role_name", columnList = "roleName")})
 public class SpitterAuthority implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

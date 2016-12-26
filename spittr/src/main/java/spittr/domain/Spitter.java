@@ -1,5 +1,7 @@
 package spittr.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,6 +16,7 @@ import java.util.Collection;
  * Created by 273cn on 16/12/15.
  */
 @Entity
+@Table(indexes = { @Index(name = "idx_username", columnList = "username", unique = true) })
 public class Spitter implements UserDetails {
     @Id
     @Null
@@ -109,30 +112,13 @@ public class Spitter implements UserDetails {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Spitter spitter = (Spitter) o;
-
-        if (!id.equals(spitter.id)) return false;
-        if (!username.equals(spitter.username)) return false;
-        if (!password.equals(spitter.password)) return false;
-        if (!realName.equals(spitter.realName)) return false;
-        if (!mobileNo.equals(spitter.mobileNo)) return false;
-        return createdTime.equals(spitter.createdTime);
-
+    public boolean equals(Object that) {
+        return EqualsBuilder.reflectionEquals(this, that, "username", "password", "realName", "mobileNo", "createdTime");
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + username.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + realName.hashCode();
-        result = 31 * result + mobileNo.hashCode();
-        result = 31 * result + createdTime.hashCode();
-        return result;
+        return HashCodeBuilder.reflectionHashCode(this, "username", "password", "realName", "mobileNo", "createdTime");
     }
 
     @Override

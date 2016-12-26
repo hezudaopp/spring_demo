@@ -3,16 +3,14 @@ package spittr.domain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
 /**
  * Created by 273cn on 16/12/14.
  */
 @Entity
+@Table(indexes = { @Index(name = "idx_spitter_id", columnList = "spitterId") })
 public class Spittle {
     @Id
     @Null
