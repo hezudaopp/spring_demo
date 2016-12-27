@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
@@ -45,15 +46,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(spitterAuthorityService);
+        auth.userDetailsService(spitterAuthorityService)
+        .passwordEncoder(new StandardPasswordEncoder(Constants.PASSWORD_SECRET));
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .anonymous().disable()
                 .authorizeRequests()
-                .antMatchers("/**").access("#oauth2.hasScope('read')")
+                .antMatchers("/**")
+                .access("#oauth2.clientHasRole('CLIENT')")
                 .regexMatchers(HttpMethod.DELETE, "/oauth/users/([^/].*?)/tokens/.*")
                 .access("#oauth2.clientHasRole('CLIENT') and (hasRole('USER') or #oauth2.isClient()) and #oauth2.hasScope('write')")
                 .regexMatchers(HttpMethod.GET, "/oauth/clients/([^/].*?)/users/.*")

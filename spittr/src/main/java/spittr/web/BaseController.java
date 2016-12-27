@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import spittr.exceptions.ErrorResponse;
 import spittr.exceptions.InvalidArgumentException;
+import spittr.exceptions.ResourceConflictException;
 import spittr.exceptions.ResourceNotFoundException;
 
 import java.util.List;
@@ -24,6 +25,12 @@ public class BaseController {
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse notFound(ResourceNotFoundException e) {
-        return new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getResourceName() + " " + e.getResourceId() + " not found.");
+        return e.getErrorResponse();
+    }
+
+    @ExceptionHandler(ResourceConflictException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse conflict(ResourceConflictException e) {
+        return e.getErrorResponse();
     }
 }

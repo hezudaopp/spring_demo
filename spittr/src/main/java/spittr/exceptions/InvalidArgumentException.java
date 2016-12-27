@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by 273cn on 16/12/22.
  */
-public class InvalidArgumentException extends RuntimeException {
+public class InvalidArgumentException extends RuntimeException implements ErrorResponseListException {
     private List<ErrorResponse> errorResponseList = new ArrayList<>();
 
     public InvalidArgumentException(Errors errors) {

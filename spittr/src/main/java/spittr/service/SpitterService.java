@@ -15,8 +15,12 @@ public class SpitterService {
     @Autowired
     SpitterRepository spitterRepository;
 
-    public Spitter getSpitter(String username) {
+    public Spitter getSpitterByUsername(String username) {
         return spitterRepository.findByUsernameIgnoringCase(username);
+    }
+
+    public Spitter getSpitterByMobileNo(String mobileNo) {
+        return spitterRepository.findByMobileNo(mobileNo);
     }
 
     public Spitter saveSpitter(Spitter spitter) {
@@ -26,5 +30,13 @@ public class SpitterService {
 
     public Page<Spitter> getSpitters(int page, int size) {
         return spitterRepository.findAll(new PageRequest(page, size));
+    }
+
+    public boolean isUsernameExists(String username) {
+        return getSpitterByUsername(username) != null;
+    }
+
+    public boolean isMobileNoExists(String mobileNo) {
+        return getSpitterByMobileNo(mobileNo) != null;
     }
 }

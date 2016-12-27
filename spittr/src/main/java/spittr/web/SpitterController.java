@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import spittr.domain.Spitter;
 import spittr.exceptions.InvalidArgumentException;
+import spittr.exceptions.ResourceConflictException;
 import spittr.exceptions.ResourceNotFoundException;
 import spittr.global.Constants;
 import spittr.service.SpitterService;
@@ -32,9 +33,9 @@ public class SpitterController extends BaseController {
             @Valid @RequestBody Spitter spitter,
             Errors errors,
             UriComponentsBuilder ucb) {
-        if (errors.hasErrors()) {
-            throw new InvalidArgumentException(errors);
-        }
+        if (errors.hasErrors()) throw new InvalidArgumentException(errors);
+        if (spitterService.isUsernameExists(spitter.getUsername())) throw new ResourceConflictException(Spitter.class.getSimpleName(), "username", spitter.getUsername());
+        if (spitterService.isMobileNoExists(spitter.getMobileNo())) throw new ResourceConflictException(Spitter.class.getSimpleName(), "mobileNo", spitter.getMobileNo());
         HttpHeaders httpHeaders = new HttpHeaders();
         URI locationUri = ucb.path("/spitter/")
                 .path(String.valueOf(spitter.getUsername()))
@@ -59,9 +60,9 @@ public class SpitterController extends BaseController {
 
     @RequestMapping(value = "/{username}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Spitter> profile(@PathVariable String username) {
-        Spitter spitter = spitterService.getSpitter(username);
+        Spitter spitter = spitterService.getSpitterByUsername(username);
         if (spitter == null) {
-            throw new ResourceNotFoundException(Spitter.class.getSimpleName(), username);
+            throw new ResourceNotFoundException(Spitter.class.getSimpleName(), "username", username);
         }
         return new ResponseEntity<>(spitter, HttpStatus.OK);
     }

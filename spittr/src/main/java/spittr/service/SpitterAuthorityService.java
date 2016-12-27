@@ -31,7 +31,7 @@ public class SpitterAuthorityService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Spitter spitter = spitterService.getSpitter(username);
+        Spitter spitter = spitterService.getSpitterByUsername(username);
         if (spitter == null)
             throw new UsernameNotFoundException("User " + username + " not found.");
 

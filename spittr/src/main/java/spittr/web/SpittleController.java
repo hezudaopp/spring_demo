@@ -52,7 +52,7 @@ public class SpittleController extends BaseController {
     public ResponseEntity<Spittle> getSpittle(@PathVariable long spittleId) {
         Spittle spittle = spittleService.get(spittleId);
         if (spittle == null) {
-            throw new ResourceNotFoundException(Spittle.class.getSimpleName(), String.valueOf(spittleId));
+            throw new ResourceNotFoundException(Spittle.class.getSimpleName(), "id", String.valueOf(spittleId));
         }
         return new ResponseEntity<>(spittle, HttpStatus.OK);
     }

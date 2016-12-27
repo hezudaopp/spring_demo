@@ -6,6 +6,9 @@ import spittr.domain.OAuth2Client;
  * Created by 273cn on 16/12/24.
  */
 public class Constants {
+    // password secret
+    public static final String PASSWORD_SECRET = "7EsF+0BCtNRW1hLtf39QLDQq5G+4Eh1/euW4azW7Qux";
+
     // environment constants
     public static final String DEV = "dev";
     public static final String QA = "qa";

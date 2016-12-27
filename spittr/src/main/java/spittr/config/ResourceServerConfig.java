@@ -25,9 +25,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(POST, "/spitters").permitAll()
                 .antMatchers(GET, "/spitters").hasAuthority("ROLE_ADMIN") // role name should start with ROLE_
-                .antMatchers("/spitters/**").authenticated()
+                .antMatchers(GET, "/spitters/**").authenticated()
                 .antMatchers(POST, "/spittles/**").authenticated()
                 .anyRequest().permitAll();
         http.exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());

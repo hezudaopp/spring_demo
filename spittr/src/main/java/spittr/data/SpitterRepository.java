@@ -16,4 +16,6 @@ public interface SpitterRepository extends JpaRepository<Spitter, Long>, Spitter
     List<Spitter> findAllShortUsernameSpitters();
 
     Spitter findByUsernameIgnoringCase(String username);
+
+    Spitter findByMobileNo(String mobileNo);
 }
