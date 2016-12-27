@@ -20,6 +20,10 @@ public class InvalidArgumentException extends RuntimeException implements ErrorR
         }
     }
 
+    public InvalidArgumentException(ErrorResponse errorResponse) {
+        errorResponseList.add(errorResponse);
+    }
+
     public List<ErrorResponse> getErrorResponseList() {
         return errorResponseList;
     }

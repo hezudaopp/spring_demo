@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import spittr.domain.Spitter;
+import spittr.exceptions.ErrorResponse;
 import spittr.exceptions.InvalidArgumentException;
 import spittr.exceptions.ResourceConflictException;
 import spittr.exceptions.ResourceNotFoundException;
@@ -34,6 +35,9 @@ public class SpitterController extends BaseController {
             Errors errors,
             UriComponentsBuilder ucb) {
         if (errors.hasErrors()) throw new InvalidArgumentException(errors);
+        if (spitter.getPassword().length() > 20) {
+            throw new InvalidArgumentException(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "password len greater than 20", "password"));
+        }
         if (spitterService.isUsernameExists(spitter.getUsername())) throw new ResourceConflictException(Spitter.class.getSimpleName(), "username", spitter.getUsername());
         if (spitterService.isMobileNoExists(spitter.getMobileNo())) throw new ResourceConflictException(Spitter.class.getSimpleName(), "mobileNo", spitter.getMobileNo());
         HttpHeaders httpHeaders = new HttpHeaders();
