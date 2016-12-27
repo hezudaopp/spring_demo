@@ -28,7 +28,7 @@ public class Spitter implements UserDetails {
     private String username;
 
     @NotNull
-    @Size(min = 6, max = 16)
+    @Size(min = 6, max = 1024)
     private String password;
 
     @NotNull

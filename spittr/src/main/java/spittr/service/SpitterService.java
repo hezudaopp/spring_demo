@@ -3,9 +3,11 @@ package spittr.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 import spittr.data.SpitterRepository;
 import spittr.domain.Spitter;
+import spittr.global.Constants;
 
 /**
  * Created by 273cn on 16/12/21.
@@ -25,6 +27,8 @@ public class SpitterService {
 
     public Spitter saveSpitter(Spitter spitter) {
         spitter.setCreatedTime(System.currentTimeMillis() / 1000);
+        // encode password.
+        spitter.setPassword(new StandardPasswordEncoder(Constants.PASSWORD_SECRET).encode(spitter.getPassword()));
         return spitterRepository.save(spitter);
     }
 
