@@ -6,7 +6,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import spittr.config.DataConfig;
+import spittr.config.DatabaseConfig;
 import spittr.config.RootConfig;
 import spittr.config.WebConfig;
 import spittr.web.SpitterController;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {RootConfig.class, WebConfig.class, DataConfig.class})
+@ContextConfiguration(classes = {RootConfig.class, WebConfig.class, DatabaseConfig.class})
 public class SpitterControllerTest {
     @Autowired
     private SpitterController spitterController;

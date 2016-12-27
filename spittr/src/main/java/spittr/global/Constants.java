@@ -6,6 +6,12 @@ import spittr.domain.OAuth2Client;
  * Created by 273cn on 16/12/24.
  */
 public class Constants {
+    // environment constants
+    public static final String DEV = "dev";
+    public static final String QA = "qa";
+    public static final String SIM = "sim";
+    public static final String PROD = "prod";
+
     // query constants
     public static final String DEFAULT_PAGE = "0";
     public static final String DEFAULT_SIZE = "20";
